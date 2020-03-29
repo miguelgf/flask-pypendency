@@ -12,6 +12,7 @@ setup(
     author_email='miguelgzflores@gmail.com',
     description='Flask extension for Pypendency, a dependency injection tool',
     long_description=README,
+    long_description_content_type="text/markdown",
     packages=['flask_pypendency'],
     zip_safe=False,
     include_package_data=True,
