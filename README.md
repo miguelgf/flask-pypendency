@@ -30,6 +30,18 @@ Pypendency(app)
 
 ## Usage
 
+Anywhere in your app, you will be able to access the container using the app
+
+```python
+from flask import current_app as app
+
+@app.route('/hello')
+def hello():
+    service = app.container.get('my.service')
+    
+    return service.say_hello()
+```
+
 #### Examples
 
 ## Contributing / Running project locally

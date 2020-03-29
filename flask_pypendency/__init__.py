@@ -23,18 +23,13 @@ class Pypendency:
         # List of absolute paths where to search for the folder name
         app.config.setdefault("PYPENDENCY_DISCOVER_PATHS", [app.root_path])
 
-        if not hasattr(app, "extensions"):
-            app.extensions = {}
-
-        app.extensions["pypendency"] = None
         self._configure(app)
 
     def _configure(self, app: Flask) -> None:
-        container = ContainerBuilder([])
-        app.extensions["pypendency"] = container
-
-        py_loader = PyLoader(app.extensions["pypendency"])
-        yaml_loader = YamlLoader(app.extensions["pypendency"])
+        app.container = ContainerBuilder([])
+        
+        py_loader = PyLoader(app.container)
+        yaml_loader = YamlLoader(app.container)
 
         di_folder_name = app.config.get("PYPENDENCY_DI_FOLDER_NAME")
         for registered_place in app.config.get("PYPENDENCY_DISCOVER_PATHS"):
