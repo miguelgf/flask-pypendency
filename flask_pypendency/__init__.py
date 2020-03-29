@@ -27,6 +27,7 @@ class Pypendency:
 
     def _configure(self, app: Flask) -> None:
         app.container = ContainerBuilder([])
+        print("Root Path")
         print(app.root_path)
         py_loader = PyLoader(app.container)
         yaml_loader = YamlLoader(app.container)
