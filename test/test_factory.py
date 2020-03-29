@@ -13,7 +13,7 @@ class TestFlaskFactory(TestCase):
         app1 = self.__create_test_app()
         app2 = self.__create_test_app()
 
-        self.assertNotEqual(app1.extensions["pypendency"], app2.extensions["pypendency"])
+        self.assertNotEqual(app1.container, app2.container)
 
     def __create_test_app(self) -> Flask:
         app = Flask(__name__)

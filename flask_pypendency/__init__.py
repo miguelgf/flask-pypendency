@@ -17,17 +17,13 @@ class Pypendency:
             self.init_app(app)
 
     def init_app(self, app: Flask) -> None:
-        # Will search folders with this name under the files locations dir
         app.config.setdefault("PYPENDENCY_DI_FOLDER_NAME", "_dependency_injection")
-
-        # List of absolute paths where to search for the folder name
         app.config.setdefault("PYPENDENCY_DISCOVER_PATHS", [app.root_path])
 
         self._configure(app)
 
     def _configure(self, app: Flask) -> None:
         app.container = ContainerBuilder([])
-        
         py_loader = PyLoader(app.container)
         yaml_loader = YamlLoader(app.container)
 
