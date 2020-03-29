@@ -13,8 +13,6 @@ class Pypendency:
     def __init__(self, app: Optional[Flask] = None):
         self.app = app
 
-        print(app.root_path)
-
         if app is not None:
             self.init_app(app)
 

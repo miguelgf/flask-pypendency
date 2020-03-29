@@ -7,6 +7,5 @@ WORKDIR /usr
 COPY Pipfile /usr/Pipfile
 COPY Pipfile.lock /usr/Pipfile.lock
 
-RUN pip install pipenv
-
-RUN pipenv install --dev
+RUN pip install pipenv \
+    && pipenv install --dev

@@ -31,7 +31,7 @@ class TestLoader(TestCase):
 
     @patch("flask_pypendency.YamlLoader")
     @patch("flask_pypendency.PyLoader")
-    def test_loader_default_values(self, py_loader, yaml_loader):
+    def test_loader_configured_di_folder(self, py_loader, yaml_loader):
         """
         Specify the folders loads different routes
         """
