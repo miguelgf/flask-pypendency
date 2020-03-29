@@ -1,11 +1,10 @@
-FROM python:3.6-slim
+FROM python:3.6
 
-ENV PYTHONPATH /usr
+WORKDIR /usr/src/app
 
-WORKDIR /usr
+COPY Pipfile /usr/src/app/Pipfile
+COPY Pipfile.lock /usr/src/app/Pipfile.lock
 
-COPY Pipfile /usr/Pipfile
-COPY Pipfile.lock /usr/Pipfile.lock
+RUN pip install pipenv
 
-RUN pip install pipenv \
-    && pipenv install --dev
+RUN pipenv install --dev
