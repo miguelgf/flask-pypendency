@@ -21,7 +21,5 @@ jobs:
           pip install pipenv
           pipenv install --dev
       - name: Unittest
-        env:
-          PYTHONPATH: ${PYTHONPATH}:${PWD}
         run: |
           pipenv run make run-tests
