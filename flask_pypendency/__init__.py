@@ -1,7 +1,7 @@
 import glob
 from typing import Optional
 
-from flask import Flask
+from flask import Flask, current_app
 from pypendency.builder import ContainerBuilder
 from pypendency.loaders.py_loader import PyLoader
 from pypendency.loaders.yaml_loader import YamlLoader
@@ -23,12 +23,20 @@ class Pypendency:
         self._configure(app)
 
     def _configure(self, app: Flask) -> None:
-        app.container = ContainerBuilder([])
-        py_loader = PyLoader(app.container)
-        yaml_loader = YamlLoader(app.container)
+        if not hasattr(app, "extensions"):
+            app.extensions = {}
+
+        app.extensions["pypendency"] = {"container": ContainerBuilder([])}
+
+        py_loader = PyLoader(app.extensions["pypendency"]["container"])
+        yaml_loader = YamlLoader(app.extensions["pypendency"]["container"])
 
         di_folder_name = app.config.get("PYPENDENCY_DI_FOLDER_NAME")
         for registered_place in app.config.get("PYPENDENCY_DISCOVER_PATHS"):
             for di_folder in glob.glob(f"{registered_place}/**/{di_folder_name}", recursive=True):
                 py_loader.load_dir(di_folder)
                 yaml_loader.load_dir(di_folder)
+
+    @property
+    def container(self) -> ContainerBuilder:
+        return current_app.extensions["pypendency"]["container"]
