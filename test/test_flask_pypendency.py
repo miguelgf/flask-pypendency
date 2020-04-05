@@ -19,9 +19,10 @@ class TestFlaskPypendency(TestCase):
             ]
         )
 
-        Pypendency(app)
+        pypendency = Pypendency(app)
 
-        self.assertIsInstance(app.container.get("test.resources.test_full.autodiscover1.a.A"), A)
-        self.assertIsInstance(app.container.get("test.resources.test_full.autodiscover2.b.B"), B)
+        with app.app_context():
+            self.assertIsInstance(pypendency.container.get("test.resources.test_full.autodiscover1.a.A"), A)
+            self.assertIsInstance(pypendency.container.get("test.resources.test_full.autodiscover2.b.B"), B)
 
 
