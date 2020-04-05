@@ -1,3 +1,6 @@
+![](https://github.com/miguelgf/flask-pypendency/workflows/Tests/badge.svg)
+[![PyPI version](https://badge.fury.io/py/Flask-Pypendency.svg)](https://badge.fury.io/py/Flask-Pypendency)
+
 # Flask pypendency extension
 Flask extension for [Pypendency](https://github.com/Feverup/pypendency). 
 Pypendency is a dependency injection library for python 3.6+.
@@ -23,7 +26,7 @@ from flask import Flask
 from flask_pypendency import Pypendency
 
 app = Flask(__name__)
-Pypendency(app)
+pypendency = Pypendency(app)
 ```
 
 ## Usage
@@ -35,7 +38,7 @@ from flask import current_app as app
 
 @app.route('/hello')
 def hello():
-    service = app.container.get('my.service')
+    service = pypendency.container.get('my.service')
     
     return service.say_hello()
 ```
