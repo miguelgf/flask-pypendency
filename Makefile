@@ -1,2 +1,2 @@
 run-tests:
-	python -m unittest
+	python3 -m unittest
